@@ -24,7 +24,7 @@ import {TodoEvent} from "./js/TodoEvent"
         }
     ]
 
-    const todoEvent: TodoEvent = new TodoEvent(todoData)
+    const todoEvent: TodoEvent = new TodoEvent(todoData, dTodoList)
 
     const init = (): void => {
         bindEvent()
@@ -36,13 +36,20 @@ import {TodoEvent} from "./js/TodoEvent"
     }
 
     function handleAddBtnClick(): void {
-        todoEvent.addTodo(<ITodoData> {
-            id: 4,
-            content: '666',
-            completed: false,
-        })
+        const value: string = dInput.value.trim()
 
-        console.log(todoData)
+        if (value.length) {
+            const result: undefined | number = todoEvent.addTodo(<ITodoData> {
+                id: 4,
+                content: value,
+                completed: false,
+            })
+
+            if (result && result === 1001) {
+                alert('列表项已存在')
+                return
+            }
+        }
     }
 
     function handleListClick(e: MouseEvent): void {
