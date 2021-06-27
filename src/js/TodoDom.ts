@@ -1,6 +1,6 @@
 import {ITodoData} from "./typing";
 import {TodoTemplate} from "./TodoTemplate";
-import {findParentNode} from "./utils";
+import {createItem, findParentNode} from "./utils";
 
 class TodoDom extends TodoTemplate{
     private todoWrapper: HTMLElement
@@ -10,10 +10,12 @@ class TodoDom extends TodoTemplate{
         this.todoWrapper = todoWrapper
     }
 
+    protected initList(todoData: ITodoData[]) {
+        todoData.map(todo => this.addItem(todo))
+    }
+
     protected addItem(todo: ITodoData) {
-        const dItem: HTMLElement = document.createElement('div')
-        dItem.className = 'todo-item'
-        dItem.innerHTML = this.todoView(todo)
+        const dItem: HTMLElement = createItem('div', 'todo-item', this.todoView(todo))
         this.todoWrapper.appendChild(dItem)
     }
 

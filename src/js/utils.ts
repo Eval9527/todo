@@ -6,7 +6,16 @@ function findParentNode(target: HTMLElement, className: string): HTMLElement {
     }
 }
 
+function createItem(tagName: string, className: string, todoItem: string): HTMLElement {
+    const dItem: HTMLElement = document.createElement(tagName)
+    dItem.className = className
+    dItem.innerHTML = todoItem
+
+    return dItem
+}
+
 
 export {
-    findParentNode
+    findParentNode,
+    createItem,
 }

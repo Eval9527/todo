@@ -46,7 +46,7 @@ import {TodoEvent} from "./js/TodoEvent"
             })
 
             if (result && result === 1001) {
-                alert('列表项已存在')
+            alert('列表项已存在')
                 return
             }
 
