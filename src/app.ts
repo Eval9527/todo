@@ -49,6 +49,9 @@ import {TodoEvent} from "./js/TodoEvent"
                 alert('列表项已存在')
                 return
             }
+
+            dInput.value = ''
+            dInput.focus()
         }
     }
 
