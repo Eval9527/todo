@@ -40,7 +40,7 @@ import {TodoEvent} from "./js/TodoEvent"
 
         if (value.length) {
             const result: undefined | number = todoEvent.addTodo(<ITodoData> {
-                id: 4,
+                id: new Date().getTime(),
                 content: value,
                 completed: false,
             })
@@ -57,10 +57,13 @@ import {TodoEvent} from "./js/TodoEvent"
         const tagName = tar.tagName.toLocaleLowerCase()
 
         if (tagName === 'input' || tagName === 'button') {
+            const id = parseInt(tar.dataset.id)
             switch (tagName) {
                 case "input":
+                    todoEvent.toggleComplete(tar, id)
                     break
                 case "button":
+                    todoEvent.removeTodo(tar, id)
                     break
                 default:
                     break
