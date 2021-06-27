@@ -2,10 +2,11 @@ import {ITodoData} from "./js/typing";
 import {TodoEvent} from "./js/TodoEvent"
 
 ((doc) => {
-    const dInput: HTMLInputElement = document.querySelector('input')
-    const dAddBtn: HTMLElement = document.querySelector('button')
-    const dTodoList: HTMLElement = document.querySelector('.todo-list')
+    const dInput: HTMLInputElement = document.querySelector('input')  // input 输入框
+    const dAddBtn: HTMLElement = document.querySelector('button')  // button 增加按钮
+    const dTodoList: HTMLElement = document.querySelector('.todo-list')  // todo 列表
 
+    // 初始数据
     const todoData: ITodoData[] = [
         {
             id: 1,
@@ -35,6 +36,7 @@ import {TodoEvent} from "./js/TodoEvent"
         dTodoList.addEventListener('click', handleListClick, false)
     }
 
+    // 添加操作
     function handleAddBtnClick(): void {
         const value: string = dInput.value.trim()
 
@@ -47,6 +49,7 @@ import {TodoEvent} from "./js/TodoEvent"
 
             if (result && result === 1001) {
             alert('列表项已存在')
+                dInput.select()
                 return
             }
 
@@ -55,6 +58,7 @@ import {TodoEvent} from "./js/TodoEvent"
         }
     }
 
+    // 每个 todo 子项的状态改变、删除事件
     function handleListClick(e: MouseEvent): void {
         const tar = e.target as HTMLElement
         const tagName = tar.tagName.toLocaleLowerCase()
