@@ -5,7 +5,7 @@ function getTodoList(
     target: any,
     methodName: string,
     descriptor: PropertyDecorator
-) {
+): void {
     // 保存原有的 init 函数
     const _origin = descriptor.value
 
@@ -23,6 +23,22 @@ function getTodoList(
     }
 }
 
+
+function removeTodo(
+    target: any,
+    methodName: string,
+    descriptor: PropertyDecorator
+): void {
+    const _origin = descriptor.value
+
+    descriptor.value = function (target: HTMLElement, id: number) {
+        $.post('http://localhost:8080/remove', { id }).then((res:string) => {
+            _origin.call(this, target, id)
+        })
+    }
+}
+
 export {
-    getTodoList
+    getTodoList,
+    removeTodo,
 }
