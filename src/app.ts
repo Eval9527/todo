@@ -7,23 +7,7 @@ import {TodoEvent} from "./js/TodoEvent"
     const dTodoList: HTMLElement = document.querySelector('.todo-list')  // todo 列表
 
     // 初始数据
-    const todoData: ITodoData[] = [
-        {
-            id: 1,
-            content: '123',
-            completed: true,
-        },
-        {
-            id: 2,
-            content: '456',
-            completed: false,
-        },
-        {
-            id: 3,
-            content: '789',
-            completed: true,
-        }
-    ]
+    const todoData: ITodoData[] = []
 
     const todoEvent: TodoEvent = new TodoEvent(todoData, dTodoList)
 
