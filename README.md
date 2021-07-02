@@ -1,4 +1,4 @@
-# 使用 TypeScript + Vite 写的原生 TODO
+# 使用 TypeScript + Vite 写的原生 TODO，仅前端
 
 ## 面向对象、类的继承、横向切割程序
 1. 程序进行分类  
