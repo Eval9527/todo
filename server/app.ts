@@ -15,8 +15,12 @@ app.all('*', ((req, res, next) => {
 }))
 
 app.get('/todolist', function (req, res) {
-    const todoList = fileOperation('todo.json') as string
-    res.send(todoList)
+    const todoList: ITodoData[] = JSON.parse(fileOperation('todo.json') as string) as ITodoData[]
+    res.send({
+        msg: 'ok',
+        statusCode: 200,
+        data: todoList
+    })
 })
 
 app.post('/toggle', function (req, res) {

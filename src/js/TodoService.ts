@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import {ITodoData} from "./typing";
+import {ITodoData, IRequest} from "./typing";
 
 function getTodoList(
     target: any,
@@ -11,12 +11,13 @@ function getTodoList(
 
     // 重写 init 函数
     descriptor.value = function (todoData: ITodoData[]) {
-        $.get('http://localhost:8080/todolist').then((res:string) => {
-            if (!res) {
+        $.get('http://localhost:8080/todolist').then((res:IRequest) => {
+            console.log(res)
+            if (!res.data.length) {
                 return
             }
 
-            todoData = JSON.parse(res)
+            todoData = res.data
         }).then(() => {
             _origin.call(this, todoData)
         })
@@ -32,7 +33,7 @@ function removeTodo(
     const _origin = descriptor.value
 
     descriptor.value = function (target: HTMLElement, id: number) {
-        $.post('http://localhost:8080/remove', { id }).then((res:string) => {
+        $.post('http://localhost:8080/remove', { id }).then((res:IRequest) => {
             _origin.call(this, target, id)
         })
     }
@@ -46,7 +47,7 @@ function toggleTodo(
     const _origin = descriptor.value
 
     descriptor.value = function (target: HTMLElement, id: number) {
-        $.post('http://localhost:8080/toggle', { id }).then((res:string) => {
+        $.post('http://localhost:8080/toggle', { id }).then((res:IRequest) => {
             _origin.call(this, target, id)
         })
     }
@@ -60,8 +61,8 @@ function addTodo(
     const _origin = descriptor.value
 
     descriptor.value = function (todo: ITodoData) {
-        $.post('http://localhost:8080/add', { todo: JSON.stringify(todo) }).then(res => {
-            if (res.statudCode === 100) {
+        $.post('http://localhost:8080/add', { todo: JSON.stringify(todo) }).then((res: IRequest) => {
+            if (res.statusCode === 100) {
                 alert('该项已存在！')
                 return
             }

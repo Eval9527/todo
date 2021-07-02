@@ -4,6 +4,13 @@ interface ITodoData {
     completed: boolean
 }
 
+interface IRequest {
+    msg: string
+    statusCode: number
+    data?: ITodoData[]
+}
+
 export {
-    ITodoData
+    ITodoData,
+    IRequest,
 }
