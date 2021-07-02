@@ -1,6 +1,6 @@
 import {ITodoData} from "./typing";
 import {TodoDom} from "./TodoDom";
-import {getTodoList, removeTodo} from "./TodoService";
+import {getTodoList, removeTodo, toggleTodo} from "./TodoService";
 
 class TodoEvent extends TodoDom{
     private todoData: ITodoData[]
@@ -35,6 +35,7 @@ class TodoEvent extends TodoDom{
         this.removeItem(target)
     }
 
+    @toggleTodo
     public toggleComplete(target: HTMLElement, id: number): void {
         this.todoData = this.todoData.map((todo: ITodoData) => {
             if (todo.id === id) {

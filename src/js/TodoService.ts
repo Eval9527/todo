@@ -38,7 +38,22 @@ function removeTodo(
     }
 }
 
+function toggleTodo(
+    target: any,
+    methodName: string,
+    descriptor: PropertyDecorator
+): void {
+    const _origin = descriptor.value
+
+    descriptor.value = function (target: HTMLElement, id: number) {
+        $.post('http://localhost:8080/toggle', { id }).then((res:string) => {
+            _origin.call(this, target, id)
+        })
+    }
+}
+
 export {
     getTodoList,
     removeTodo,
+    toggleTodo,
 }

@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import bodyParse from 'body-parser'
-import {fileOperation, readFile, writeFile} from "./utils";
+import {fileOperation} from "./utils";
 import {ITodoData} from "../src/js/typing";
 
 const app: Application = express()
@@ -20,7 +20,22 @@ app.get('/todolist', function (req, res) {
 })
 
 app.post('/toggle', function (req, res) {
+    const id: number = parseInt(req.body.id)
 
+    fileOperation('todo.json', function (todoList: ITodoData[]) {
+        return todoList.map((todo: ITodoData) => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed
+            }
+
+            return todo
+        })
+    })
+
+    res.send({
+        msg: 'ok',
+        statusCode: 200
+    })
 })
 
 app.post('/remove', function (req, res) {
