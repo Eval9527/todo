@@ -52,6 +52,28 @@ app.post('/remove', function (req, res) {
 })
 
 app.post('/add', function (req, res) {
+    const todo: ITodoData = JSON.parse(req.body.todo)
+
+    fileOperation('todo.json', function (todoList: ITodoData[]) {
+        const isExist = todoList.find((t: ITodoData) => t.content === todo.content)
+
+        if (isExist) {
+            res.send({
+                msg: 'exist',
+                statusCode: 100
+            })
+
+            return
+        }
+
+        todoList.push(todo)
+        return todoList
+    })
+
+    res.send({
+        msg: 'ok',
+        statusCode: 200
+    })
 
 })
 

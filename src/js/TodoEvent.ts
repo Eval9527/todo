@@ -1,6 +1,6 @@
 import {ITodoData} from "./typing";
 import {TodoDom} from "./TodoDom";
-import {getTodoList, removeTodo, toggleTodo} from "./TodoService";
+import {getTodoList, removeTodo, toggleTodo, addTodo} from "./TodoService";
 
 class TodoEvent extends TodoDom{
     private todoData: ITodoData[]
@@ -17,6 +17,7 @@ class TodoEvent extends TodoDom{
         this.initList(this.todoData)
     }
 
+    @addTodo
     public addTodo(todo: ITodoData): undefined | number {
         const _todo: null | ITodoData = this.todoData.find((item: ITodoData) => item.content === todo.content)  // 去重
 
